@@ -1,4 +1,10 @@
 # RES - Labo SMTP
+
+```
+java -jar MockMock-one.jar -p 9998
+telnet 127.0.0.1 9998
+```
+
 ## Description
 Lorem ipsum.
 
