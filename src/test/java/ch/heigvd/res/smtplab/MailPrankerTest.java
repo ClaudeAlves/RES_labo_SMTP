@@ -8,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class MailPrankerTest {
     /**
-     * Rigorous Test :-)
+     * Rigorous Test :-) hihi
+     *
      */
     @Test
     public void shouldAnswerWithTrue() {
