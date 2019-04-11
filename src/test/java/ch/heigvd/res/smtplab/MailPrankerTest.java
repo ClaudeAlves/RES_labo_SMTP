@@ -1,12 +1,12 @@
-package ch.heigvd.res;
+package ch.heigvd.res.smtplab;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Unit test for simple App.
+ * Unit test for simple MailPranker.
  */
-public class AppTest {
+public class MailPrankerTest {
     /**
      * Rigorous Test :-)
      */

@@ -1,3 +1,0 @@
-bill.gates@msft.com
-loris.gilliand@heig-vd.ch
-mateo.tutic@heig-vd.ch
