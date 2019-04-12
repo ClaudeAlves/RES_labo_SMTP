@@ -6,10 +6,13 @@ import ch.heigvd.res.smtplab.model.prank.Pranker;
 import java.io.IOException;
 
 /**
- * Hello world!
+ * Main entry point for the Mail Pranker app
+ *
+ * @author Luc Wachter
  */
 public class MailPranker {
     public static void main(String[] args) {
+        // Parse configuration files
         ConfigParser cp = null;
         try {
             cp = new ConfigParser("src/main/resources/config.properties");
@@ -17,6 +20,7 @@ public class MailPranker {
             e.printStackTrace();
         }
 
+        // And generate prank
         Pranker mp = new Pranker(cp);
     }
 }
