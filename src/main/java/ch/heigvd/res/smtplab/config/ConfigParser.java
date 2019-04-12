@@ -33,8 +33,8 @@ public class ConfigParser {
      * @throws IOException if the path isn't valid
      */
     public ConfigParser(String configPath) throws IOException {
-        String pathToVictims = "";
-        String pathToMails = "";
+        String pathToVictims;
+        String pathToMails;
 
         // Parse properties config file
         try (BufferedReader config = new BufferedReader(new InputStreamReader(
@@ -112,6 +112,4 @@ public class ConfigParser {
 
         return result;
     }
-
-
 }
