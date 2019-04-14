@@ -98,25 +98,35 @@ public class SMTPClient implements InterfaceSMTPClient{
         writer.flush();
     }
 
+    /**
+     * Reads the given stream and checks whether it prints the given response code
+     * @param reader The stream from which to read
+     * @param responseCode The code to search for
+     * @throws IOException
+     */
     private void checkResponse(BufferedReader reader, int responseCode) throws IOException {
         boolean ok = false;
 
+        // Workaround the slowness of some servers
         try {
             Thread.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        // Read every line printed by the server
         String line = "";
         while (reader.ready()) {
             line = reader.readLine();
             System.out.println(line); // TODO remove
 
+            // If the line starts with the wanted response code followed by a space
             if (line.startsWith(Integer.toString(responseCode) + " ")) {
                 ok = true;
             }
         }
 
+        // If the response code wasn't printed by the server, throw
         if (ok != true) {
             throw new RuntimeException("The server didn't respond with a success code: " + line);
         }
