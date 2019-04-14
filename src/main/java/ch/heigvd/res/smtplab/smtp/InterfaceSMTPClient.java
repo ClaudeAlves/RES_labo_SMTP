@@ -12,5 +12,5 @@ public interface InterfaceSMTPClient {
      * @param mail mail to be sent
      * @throws IOException
      */
-    public void sendMessage(Mail mail) throws IOException;
+    void sendMessage(Mail mail) throws IOException;
 }
