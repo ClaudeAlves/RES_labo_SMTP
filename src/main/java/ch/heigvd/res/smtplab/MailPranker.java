@@ -21,6 +21,6 @@ public class MailPranker {
         // Generate the prank
         Pranker p = new Pranker(cp);
         // And send the prank mails
-        p.sendMails(cp.getMails());
+        p.sendPranks(cp.getMails());
     }
 }

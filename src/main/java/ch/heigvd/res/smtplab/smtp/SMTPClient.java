@@ -112,7 +112,6 @@ public class SMTPClient implements InterfaceSMTPClient{
         String line = "";
         while (reader.ready()) {
             line = reader.readLine();
-            System.out.println(line); // TODO remove
 
             // If the line starts with the wanted response code followed by a space
             if (line.startsWith(Integer.toString(responseCode) + " ")) {

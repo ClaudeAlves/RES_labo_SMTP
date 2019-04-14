@@ -43,7 +43,7 @@ public class Pranker {
      * @param mails mails to be sent
      * @throws IOException
      */
-    public void sendMails(ArrayList<String> mails) throws IOException {
+    public void sendPranks(ArrayList<String> mails) throws IOException {
         LinkedList<Prank> pranks = new LinkedList<>();
         int mailIndex = 0;
 

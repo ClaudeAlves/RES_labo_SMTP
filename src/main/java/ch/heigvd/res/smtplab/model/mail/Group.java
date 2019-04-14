@@ -9,7 +9,7 @@ import java.util.LinkedList;
  */
 public class Group {
     @Getter
-    private LinkedList<Person> members = new LinkedList<Person>();
+    private LinkedList<Person> members = new LinkedList<>();
 
     /**
      * Add a person in the group

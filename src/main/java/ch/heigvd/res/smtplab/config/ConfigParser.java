@@ -49,7 +49,7 @@ public class ConfigParser {
             // Store main parameters
             smtpServerAddress = prop.getProperty("smtpServerAddress");
             smtpServerPort = Integer.parseInt(prop.getProperty("smtpServerPort"));
-            nbrOfGroups = Integer.parseInt(prop.getProperty("numberOfGroups")); // TODO Test if the number is valid
+            nbrOfGroups = Integer.parseInt(prop.getProperty("numberOfGroups"));
 
             // Get paths to the victims fil and messages file
             pathToVictims = prop.getProperty("pathToVictims");
