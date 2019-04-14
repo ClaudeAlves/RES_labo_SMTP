@@ -19,8 +19,10 @@ public class Person {
         boolean found = matcher.find();
 
         if (found) {
-            this.name = matcher.group(1);
-            this.surname = matcher.group(2);
+            name = matcher.group(1);
+            name = name.substring(0, 1).toUpperCase() + name.substring(1);
+            surname = matcher.group(2);
+            surname = surname.substring(0, 1).toUpperCase() + surname.substring(1);
         }
     }
 }

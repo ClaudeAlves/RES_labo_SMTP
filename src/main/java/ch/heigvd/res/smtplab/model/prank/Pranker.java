@@ -38,6 +38,8 @@ public class Pranker {
         LinkedList<Prank> pranks = new LinkedList<>();
         int mailIndex = 0;
 
+        Collections.shuffle(mails);
+
         for (Group group : groups) {
             Prank prank = new Prank();
             Person sender = group.getMembers().pop();
