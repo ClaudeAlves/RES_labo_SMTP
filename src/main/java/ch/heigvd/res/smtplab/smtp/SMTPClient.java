@@ -31,14 +31,13 @@ public class SMTPClient implements InterfaceSMTPClient{
      * @throws IOException
      */
     @Override
-    public void sendMessage(Mail mail) throws IOException {
+    public void sendMail(Mail mail) throws IOException {
         // Open socket and streams
         Socket client = new Socket(address, port);
         BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream(), "UTF-8"));
         PrintWriter writer = new PrintWriter(client.getOutputStream());
 
         // Server greetings
-        checkResponse(reader, 220);
         write(writer, "EHLO superserver");
         checkResponse(reader, 250);
 
@@ -68,7 +67,7 @@ public class SMTPClient implements InterfaceSMTPClient{
 
             // Workaround the limit of mails in a certain amount of time
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

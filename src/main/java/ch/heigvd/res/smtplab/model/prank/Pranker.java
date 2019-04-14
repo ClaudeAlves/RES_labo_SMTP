@@ -69,7 +69,7 @@ public class Pranker {
         SMTPClient sender = new SMTPClient(smtpServerAddress, smtpServerPort);
 
         for (Prank prank : pranks) {
-            sender.sendMessage(prank.generateMailMessage());
+            sender.sendMail(prank.generateMailMessage());
         }
     }
 
