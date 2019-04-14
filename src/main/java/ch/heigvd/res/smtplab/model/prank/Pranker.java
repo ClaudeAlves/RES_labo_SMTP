@@ -3,7 +3,9 @@ package ch.heigvd.res.smtplab.model.prank;
 import ch.heigvd.res.smtplab.config.ConfigParser;
 import ch.heigvd.res.smtplab.model.mail.Group;
 import ch.heigvd.res.smtplab.model.mail.Person;
+import ch.heigvd.res.smtplab.smtp.SMTPClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -14,10 +16,10 @@ import java.util.LinkedList;
  * @author Claude-André Alves, Luc Wachter
  */
 public class Pranker {
-    String smtpServerAddress;
-    int smtpServerPort;
+    private String smtpServerAddress;
+    private int smtpServerPort;
 
-    LinkedList<Group> groups;
+    private LinkedList<Group> groups;
 
     public Pranker(ConfigParser config) {
         smtpServerAddress = config.getSmtpServerAddress();
@@ -32,17 +34,33 @@ public class Pranker {
         createGroups(config.getVictims(), config.getNbrOfGroups());
     }
 
-    public void sendMails(ArrayList<String> mails) {
+    public void sendMails(ArrayList<String> mails) throws IOException {
+        LinkedList<Prank> pranks = new LinkedList<>();
         int mailIndex = 0;
+
+        Collections.shuffle(mails);
 
         for (Group group : groups) {
             Prank prank = new Prank();
             Person sender = group.getMembers().pop();
 
+            // Set sender
             prank.setVictimSender(sender);
+            // Set recipients
+            prank.addVictimRecipients(group.getMembers());
+            // Set message
             prank.setMessage(mails.get(mailIndex));
 
             mailIndex = (mailIndex + 1) % mails.size();
+
+            pranks.add(prank);
+        }
+
+        // Send the pranks through SMTP
+        SMTPClient sender = new SMTPClient(smtpServerAddress, smtpServerPort);
+
+        for (Prank prank : pranks) {
+            sender.sendMessage(prank.generateMailMessage());
         }
     }
 

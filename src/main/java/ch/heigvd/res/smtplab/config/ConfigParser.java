@@ -75,27 +75,11 @@ public class ConfigParser {
                 new FileInputStream(pathToVictims), StandardCharsets.UTF_8))) {
             // Read every victim's mail
             while (victimFile.ready()) {
-                result.add(buildPerson(victimFile.readLine()));
+                result.add(new Person(victimFile.readLine()));
             }
         }
 
         return result;
-    }
-
-    /**
-     * Read a mail address and return a Person object
-     * <p>
-     * The address must be formatted as such : firstname.lastname@domain.tld
-     *
-     * @param mailAddress The mail address formatted as above
-     * @return A person object
-     */
-    private Person buildPerson(String mailAddress) {
-        // TODO Validate email (at least a minimum)
-        String firstName = mailAddress.split(".")[0];
-        String lastName = mailAddress.split(".")[1];
-
-        return new Person(mailAddress, firstName, lastName);
     }
 
     /**

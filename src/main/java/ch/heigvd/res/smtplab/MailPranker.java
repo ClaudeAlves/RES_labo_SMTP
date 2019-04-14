@@ -13,16 +13,12 @@ import java.io.IOException;
 public class MailPranker {
     private static String PATH_TO_CONFIG = "src/main/resources/config.properties";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Parse configuration files
         ConfigParser cp = null;
-        try {
-            cp = new ConfigParser(PATH_TO_CONFIG);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        cp = new ConfigParser(PATH_TO_CONFIG);
 
-        // And generate the prank
+        // Generate the prank
         Pranker p = new Pranker(cp);
         // And send the prank mails
         p.sendMails(cp.getMails());
