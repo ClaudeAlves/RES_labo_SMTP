@@ -24,7 +24,7 @@ public class Prank {
 
     public Mail generateMailMessage() {
         Mail mail = new Mail();
-        mail.setBody(this.message + "\r\n" + victimSender.getSurname());
+        mail.setBody(this.message + "\r\n" + victimSender.getName() + " " + victimSender.getSurname());
 
         String[] to = victimRecipients
                 .stream()
