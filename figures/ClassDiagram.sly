@@ -1,34 +1,23 @@
 <?xml version="1.0" encoding="iso-8859-15" standalone="no"?>
 <classDiagram>
   <diagramElements defaultViewEntities="ALL" defaultViewEnum="true" defaultViewMethods="TYPE_AND_NAME" defaultVisibleTypes="true" informations="" name="SMTPLab">
-    <entity entityType="INTERFACE" id="41922" isAbstract="true" name="InterfaceSMTPClient" visibility="PUBLIC">
-      <method isAbstract="true" isStatic="false" name="sendMessage" returnType="void" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="mail" type="Mail"/>
+    <entity entityType="CLASS" id="41094" isAbstract="false" name="ConfigParser" visibility="PUBLIC">
+      <attribute const="false" defaultValue="" isStatic="false" name="smtpServerAddress" type="String" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="smtpServerPort" type="int" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="nbrOfGroups" type="int" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="victims" type="LinkedList&lt;String&gt;" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="mails" type="LinkedList&lt;String&gt;" visibility="PRIVATE"/>
+      <method is-constructor="true" isAbstract="false" isStatic="false" name="ConfigParser" returnType="" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="configPath" type="String"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="loadVictimsList" returnType="LinkedList&lt;String&gt;" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="pathToVictims" type="String"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="loadMailsList" returnType="LinkedList&lt;String&gt;" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="pathToMails" type="String"/>
       </method>
     </entity>
-    <entity entityType="CLASS" id="41669" isAbstract="false" name="Class" visibility="PUBLIC"/>
-    <entity entityType="CLASS" id="41088" isAbstract="false" name="Group" visibility="PACKAGE">
-      <attribute const="false" defaultValue="" isStatic="false" name="members" type="LinkedList&lt;Person&gt;" visibility="PRIVATE"/>
-      <method isAbstract="false" isStatic="false" name="getMembers" returnType="LinkedList&lt;Person&gt;" view="DEFAULT" visibility="PUBLIC"/>
-      <method isAbstract="false" isStatic="false" name="addMember" returnType="void" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="p" type="Person"/>
-      </method>
-    </entity>
-    <entity entityType="CLASS" id="41089" isAbstract="false" name="Person" visibility="PUBLIC">
-      <attribute const="false" defaultValue="" isStatic="false" name="address" type="String" visibility="PRIVATE"/>
-      <attribute const="false" defaultValue="" isStatic="false" name="name" type="String" visibility="PRIVATE"/>
-      <attribute const="false" defaultValue="" isStatic="false" name="surname" type="String" visibility="PRIVATE"/>
-      <method is-constructor="true" isAbstract="false" isStatic="false" name="Person" returnType="" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="address" type="String"/>
-        <variable const="false" name="name" type="String"/>
-        <variable const="false" name="surname" type="String"/>
-      </method>
-      <method isAbstract="false" isStatic="false" name="getAddress" returnType="String" view="DEFAULT" visibility="PUBLIC"/>
-      <method isAbstract="false" isStatic="false" name="getName" returnType="String" view="DEFAULT" visibility="PUBLIC"/>
-      <method isAbstract="false" isStatic="false" name="getSurname" returnType="String" view="DEFAULT" visibility="PUBLIC"/>
-    </entity>
-    <entity entityType="CLASS" id="41090" isAbstract="false" name="Prank" visibility="PUBLIC"/>
-    <entity entityType="CLASS" id="41091" isAbstract="false" name="Pranker" visibility="PUBLIC"/>
+    <entity entityType="CLASS" id="41093" isAbstract="false" name="SMTPClient" visibility="PUBLIC"/>
     <entity entityType="CLASS" id="41092" isAbstract="false" name="Mail" visibility="PUBLIC">
       <attribute const="false" defaultValue="" isStatic="false" name="from" type="String" visibility="PRIVATE"/>
       <attribute const="false" defaultValue="" isStatic="false" name="to" type="String[]" visibility="PRIVATE"/>
@@ -61,36 +50,90 @@
         <variable const="false" name="body" type="String"/>
       </method>
     </entity>
-    <entity entityType="CLASS" id="41093" isAbstract="false" name="SMTPClient" visibility="PUBLIC"/>
-    <entity entityType="CLASS" id="41094" isAbstract="false" name="ConfigParser" visibility="PUBLIC">
-      <attribute const="false" defaultValue="" isStatic="false" name="smtpServerAddress" type="String" visibility="PRIVATE"/>
-      <attribute const="false" defaultValue="" isStatic="false" name="smtpServerPort" type="int" visibility="PRIVATE"/>
-      <attribute const="false" defaultValue="" isStatic="false" name="nbrOfGroups" type="int" visibility="PRIVATE"/>
-      <attribute const="false" defaultValue="" isStatic="false" name="victims" type="LinkedList&lt;String&gt;" visibility="PRIVATE"/>
-      <attribute const="false" defaultValue="" isStatic="false" name="mails" type="LinkedList&lt;String&gt;" visibility="PRIVATE"/>
-      <method is-constructor="true" isAbstract="false" isStatic="false" name="ConfigParser" returnType="" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="configPath" type="String"/>
+    <entity entityType="CLASS" id="41091" isAbstract="false" name="Pranker" visibility="PUBLIC"/>
+    <entity entityType="CLASS" id="41090" isAbstract="false" name="Prank" visibility="PUBLIC">
+      <attribute const="false" defaultValue="" isStatic="false" name="victimSender" type="Person" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="victimRecipients" type="LinkedList&lt;Person&gt;" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="witnessRecipients" type="LinkedList&lt;Person&gt;" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="message" type="String" visibility="PRIVATE"/>
+      <method isAbstract="false" isStatic="false" name="getVictimSender" returnType="Person" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="getVictimRecipients" returnType="LinkedList&lt;Person&gt;" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="getWitnessRecipients" returnType="LinkedList&lt;Person&gt;" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="getMessage" returnType="String" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="setVictimSender" returnType="void" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="victimeSender" type="Person"/>
       </method>
-      <method isAbstract="false" isStatic="false" name="loadVictimsList" returnType="LinkedList&lt;String&gt;" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="pathToVictims" type="String"/>
+      <method isAbstract="false" isStatic="false" name="addVictimRecipients" returnType="void" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="victimRecipients" type="LinkedList&lt;Person&gt;"/>
       </method>
-      <method isAbstract="false" isStatic="false" name="loadMailsList" returnType="LinkedList&lt;String&gt;" view="DEFAULT" visibility="PUBLIC">
-        <variable const="false" name="pathToMails" type="String"/>
+      <method isAbstract="false" isStatic="false" name="addWitnessRecipients" returnType="void" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="witnessRecipients" type="LinkedList&lt;Person&gt;"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="method" returnType="void" view="DEFAULT" visibility="PUBLIC"/>
+    </entity>
+    <entity entityType="CLASS" id="41089" isAbstract="false" name="Person" visibility="PUBLIC">
+      <attribute const="false" defaultValue="" isStatic="false" name="address" type="String" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="name" type="String" visibility="PRIVATE"/>
+      <attribute const="false" defaultValue="" isStatic="false" name="surname" type="String" visibility="PRIVATE"/>
+      <method is-constructor="true" isAbstract="false" isStatic="false" name="Person" returnType="" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="address" type="String"/>
+        <variable const="false" name="name" type="String"/>
+        <variable const="false" name="surname" type="String"/>
+      </method>
+      <method isAbstract="false" isStatic="false" name="getAddress" returnType="String" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="getName" returnType="String" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="getSurname" returnType="String" view="DEFAULT" visibility="PUBLIC"/>
+    </entity>
+    <entity entityType="CLASS" id="41088" isAbstract="false" name="Group" visibility="PACKAGE">
+      <attribute const="false" defaultValue="" isStatic="false" name="members" type="LinkedList&lt;Person&gt;" visibility="PRIVATE"/>
+      <method isAbstract="false" isStatic="false" name="getMembers" returnType="LinkedList&lt;Person&gt;" view="DEFAULT" visibility="PUBLIC"/>
+      <method isAbstract="false" isStatic="false" name="addMember" returnType="void" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="p" type="Person"/>
+      </method>
+    </entity>
+    <entity entityType="CLASS" id="41669" isAbstract="false" name="Class" visibility="PUBLIC"/>
+    <entity entityType="INTERFACE" id="41922" isAbstract="true" name="InterfaceSMTPClient" visibility="PUBLIC">
+      <method isAbstract="true" isStatic="false" name="sendMessage" returnType="void" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="mail" type="Mail"/>
       </method>
     </entity>
   </diagramElements>
   <umlView grid="10" name="Main view" open="true">
-    <componentView color="-2079" componentID="41094" displayAttributes="true" displayDefault="true" displayMethods="true">
+    <componentView color="-2079" componentID="41922" displayAttributes="true" displayDefault="true" displayMethods="true">
       <geometry>
-        <x>630</x>
+        <x>390</x>
         <y>340</y>
-        <w>360</w>
-        <h>175</h>
+        <w>210</w>
+        <h>84</h>
       </geometry>
     </componentView>
-    <componentView color="-2079" componentID="41093" displayAttributes="true" displayDefault="true" displayMethods="true">
+    <componentView color="-2079" componentID="41088" displayAttributes="true" displayDefault="true" displayMethods="true">
       <geometry>
-        <x>760</x>
+        <x>60</x>
+        <y>90</y>
+        <w>230</w>
+        <h>100</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="41089" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>340</x>
+        <y>90</y>
+        <w>340</w>
+        <h>160</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="41090" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>1060</x>
+        <y>270</y>
+        <w>410</w>
+        <h>235</h>
+      </geometry>
+    </componentView>
+    <componentView color="-2079" componentID="41091" displayAttributes="true" displayDefault="true" displayMethods="true">
+      <geometry>
+        <x>950</x>
         <y>140</y>
         <w>150</w>
         <h>55</h>
@@ -104,52 +147,20 @@
         <h>325</h>
       </geometry>
     </componentView>
-    <componentView color="-2079" componentID="41091" displayAttributes="true" displayDefault="true" displayMethods="true">
+    <componentView color="-2079" componentID="41093" displayAttributes="true" displayDefault="true" displayMethods="true">
       <geometry>
-        <x>950</x>
+        <x>760</x>
         <y>140</y>
         <w>150</w>
         <h>55</h>
       </geometry>
     </componentView>
-    <componentView color="-2079" componentID="41090" displayAttributes="true" displayDefault="true" displayMethods="true">
+    <componentView color="-2079" componentID="41094" displayAttributes="true" displayDefault="true" displayMethods="true">
       <geometry>
-        <x>820</x>
-        <y>40</y>
-        <w>150</w>
-        <h>55</h>
-      </geometry>
-    </componentView>
-    <componentView color="-2079" componentID="41089" displayAttributes="true" displayDefault="true" displayMethods="true">
-      <geometry>
-        <x>340</x>
-        <y>90</y>
-        <w>340</w>
-        <h>160</h>
-      </geometry>
-    </componentView>
-    <componentView color="-2079" componentID="41088" displayAttributes="true" displayDefault="true" displayMethods="true">
-      <geometry>
-        <x>60</x>
-        <y>90</y>
-        <w>230</w>
-        <h>100</h>
-      </geometry>
-    </componentView>
-    <componentView color="-2079" componentID="41669" displayAttributes="true" displayDefault="true" displayMethods="true">
-      <geometry>
-        <x>1070</x>
-        <y>290</y>
-        <w>150</w>
-        <h>55</h>
-      </geometry>
-    </componentView>
-    <componentView color="-2079" componentID="41922" displayAttributes="true" displayDefault="true" displayMethods="true">
-      <geometry>
-        <x>390</x>
+        <x>630</x>
         <y>340</y>
-        <w>210</w>
-        <h>84</h>
+        <w>360</w>
+        <h>175</h>
       </geometry>
     </componentView>
   </umlView>
