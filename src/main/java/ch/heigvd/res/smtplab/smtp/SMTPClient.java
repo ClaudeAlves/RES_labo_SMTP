@@ -38,6 +38,7 @@ public class SMTPClient implements InterfaceSMTPClient{
         PrintWriter writer = new PrintWriter(client.getOutputStream());
 
         // Server greetings
+        checkResponse(reader, 220);
         write(writer, "EHLO superserver");
         checkResponse(reader, 250);
 
@@ -64,6 +65,7 @@ public class SMTPClient implements InterfaceSMTPClient{
             // End mail
             writer.write("\r\n.\r\n");
             writer.flush();
+            checkResponse(reader, 250);
 
             // Workaround the limit of mails in a certain amount of time
             try {
@@ -102,7 +104,7 @@ public class SMTPClient implements InterfaceSMTPClient{
 
         // Workaround the slowness of some servers
         try {
-            Thread.sleep(1);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
