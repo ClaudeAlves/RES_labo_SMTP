@@ -7,15 +7,13 @@ import java.net.Socket;
 import java.util.Date;
 
 /**
- * SMTPClient helps connecting to a
+ * Handles connection to SMTP server, and sends mails
+ *
+ * @author Claude-André Alves, Luc Wachter
  */
 public class SMTPClient implements InterfaceSMTPClient{
     private String address;
     private int port;
-
-    Socket client;
-    BufferedReader reader;
-    PrintWriter writer;
 
     /**
      * SMTPClient constructor
@@ -35,13 +33,9 @@ public class SMTPClient implements InterfaceSMTPClient{
     @Override
     public void sendMessage(Mail mail) throws IOException {
         // Open socket and streams
-        try {
-            client = new Socket(address, port);
-            reader = new BufferedReader(new InputStreamReader(client.getInputStream(), "UTF-8"));
-            writer = new PrintWriter(client.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Socket client = new Socket(address, port);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream(), "UTF-8"));
+        PrintWriter writer = new PrintWriter(client.getOutputStream());
 
         // Server greetings
         checkResponse(reader, 220);
