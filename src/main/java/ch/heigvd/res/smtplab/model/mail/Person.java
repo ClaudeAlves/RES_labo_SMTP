@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 
 /**
  * Person class for SMTP usage only name/surname and address
+ *
+ * @author Claude-André Alves, Luc Wachter
  */
 @Getter
 public class Person {

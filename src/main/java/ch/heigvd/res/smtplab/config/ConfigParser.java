@@ -15,7 +15,7 @@ import java.util.Properties;
 /**
  * Parser for the MailPranker's configuration
  *
- * @author Luc Wachter
+ * @author Claude-André Alves, Luc Wachter
  */
 @Getter
 public class ConfigParser {

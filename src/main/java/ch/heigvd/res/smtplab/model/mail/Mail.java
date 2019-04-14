@@ -5,6 +5,8 @@ import lombok.Setter;
 
 /**
  * SMTP structured mail
+ *
+ * @author Claude-André Alves, Luc Wachter
  */
 @Getter
 @Setter

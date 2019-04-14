@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 /**
  * Representation of a mail prank
+ *
+ * @author Claude-André Alves, Luc Wachter
  */
 @Getter
 public class Prank {

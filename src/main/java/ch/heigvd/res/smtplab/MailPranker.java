@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Main entry point for the Mail Pranker app
  *
- * @author Luc Wachter
+ * @author Claude-André Alves, Luc Wachter
  */
 public class MailPranker {
     private static String PATH_TO_CONFIG = "src/main/resources/config.properties";

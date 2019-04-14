@@ -5,6 +5,8 @@ import java.io.IOException;
 
 /**
  * SMTPClient interface
+ *
+ * @author Claude-André Alves, Luc Wachter
  */
 public interface InterfaceSMTPClient {
     /**

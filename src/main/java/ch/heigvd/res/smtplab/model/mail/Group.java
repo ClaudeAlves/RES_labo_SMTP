@@ -6,6 +6,8 @@ import java.util.LinkedList;
 
 /**
  * Class representing a group of persons
+ *
+ * @author Claude-André Alves, Luc Wachter
  */
 public class Group {
     @Getter
