@@ -3,6 +3,9 @@ package ch.heigvd.res.smtplab.model.mail;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * SMTP structured mail
+ */
 @Getter
 @Setter
 public class Mail {

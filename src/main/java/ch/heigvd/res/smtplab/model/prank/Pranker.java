@@ -21,6 +21,10 @@ public class Pranker {
 
     private LinkedList<Group> groups;
 
+    /**
+     * Pranker constructor
+     * @param config
+     */
     public Pranker(ConfigParser config) {
         smtpServerAddress = config.getSmtpServerAddress();
         smtpServerPort = config.getSmtpServerPort();
@@ -34,6 +38,11 @@ public class Pranker {
         createGroups(config.getVictims(), config.getNbrOfGroups());
     }
 
+    /**
+     *  Sends all mails setting the sender and the recipients
+     * @param mails mails to be sent
+     * @throws IOException
+     */
     public void sendMails(ArrayList<String> mails) throws IOException {
         LinkedList<Prank> pranks = new LinkedList<>();
         int mailIndex = 0;
@@ -64,6 +73,11 @@ public class Pranker {
         }
     }
 
+    /**
+     * Creates groups of victims to be prank
+     * @param victims all persons to be split into groups
+     * @param nbrOfGroups number of groups
+     */
     public void createGroups(LinkedList<Person> victims, int nbrOfGroups) {
         int nbrOfVictimsPerGroup = victims.size() / nbrOfGroups;
         groups = new LinkedList<>();

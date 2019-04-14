@@ -5,17 +5,24 @@ import lombok.Getter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Person class for SMTP usage only name/surname and address
+ */
 @Getter
 public class Person {
     private String address;
     private String name;
     private String surname;
 
-    public Person(String adress) {
-        this.address = adress;
+    /**
+     * Person constructor based on his address
+     * @param address
+     */
+    public Person(String address) {
+        this.address = address;
 
         Pattern pattern = Pattern.compile("(.*)\\.(.*)@");
-        Matcher matcher = pattern.matcher(address);
+        Matcher matcher = pattern.matcher(this.address);
         boolean found = matcher.find();
 
         if (found) {

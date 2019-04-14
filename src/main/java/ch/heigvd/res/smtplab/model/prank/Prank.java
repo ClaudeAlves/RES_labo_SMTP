@@ -8,6 +8,9 @@ import lombok.Setter;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
+/**
+ * Representation of a mail prank
+ */
 @Getter
 public class Prank {
     @Setter
@@ -18,10 +21,18 @@ public class Prank {
 
     private LinkedList<Person> victimRecipients = new LinkedList<>();
 
+    /**
+     * Add a list of recipient victim
+     * @param victimRecipients list of persons to be add to the prank
+     */
     public void addVictimRecipients(LinkedList<Person> victimRecipients) {
         this.victimRecipients.addAll(victimRecipients);
     }
 
+    /**
+     * generates a pranked mail ready to be sent
+     * @return the prank mail
+     */
     public Mail generateMailMessage() {
         Mail mail = new Mail();
         mail.setBody(this.message + "\r\n" + victimSender.getName() + " " + victimSender.getSurname());
