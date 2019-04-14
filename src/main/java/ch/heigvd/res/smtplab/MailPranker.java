@@ -11,16 +11,20 @@ import java.io.IOException;
  * @author Luc Wachter
  */
 public class MailPranker {
+    private static String PATH_TO_CONFIG = "src/main/resources/config.properties";
+
     public static void main(String[] args) {
         // Parse configuration files
         ConfigParser cp = null;
         try {
-            cp = new ConfigParser("src/main/resources/config.properties");
+            cp = new ConfigParser(PATH_TO_CONFIG);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // And generate prank
-        Pranker mp = new Pranker(cp);
+        // And generate the prank
+        Pranker p = new Pranker(cp);
+        // And send the prank mails
+        p.sendMails(cp.getMails());
     }
 }

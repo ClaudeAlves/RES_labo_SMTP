@@ -1,5 +1,6 @@
 package ch.heigvd.res.smtplab.config;
 
+import ch.heigvd.res.smtplab.model.mail.Person;
 import lombok.Getter;
 
 import java.io.BufferedReader;
@@ -7,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Properties;
 
@@ -23,8 +25,8 @@ public class ConfigParser {
     private int nbrOfGroups;
 
     // Prank parameters
-    private LinkedList<String> victims;
-    private LinkedList<String> mails;
+    private LinkedList<Person> victims;
+    private ArrayList<String> mails;
 
     /**
      * Constructor that reads configs
@@ -65,19 +67,35 @@ public class ConfigParser {
      * @return a list of victims
      * @throws IOException if the path isn't valid
      */
-    private LinkedList<String> loadVictimsList(String pathToVictims) throws IOException {
-        LinkedList<String> result = new LinkedList<>();
+    private LinkedList<Person> loadVictimsList(String pathToVictims) throws IOException {
+        LinkedList<Person> result = new LinkedList<>();
 
         // Parse victims file
         try (BufferedReader victimFile = new BufferedReader(new InputStreamReader(
                 new FileInputStream(pathToVictims), StandardCharsets.UTF_8))) {
             // Read every victim's mail
             while (victimFile.ready()) {
-                result.add(victimFile.readLine());
+                result.add(buildPerson(victimFile.readLine()));
             }
         }
 
         return result;
+    }
+
+    /**
+     * Read a mail address and return a Person object
+     * <p>
+     * The address must be formatted as such : firstname.lastname@domain.tld
+     *
+     * @param mailAddress The mail address formatted as above
+     * @return A person object
+     */
+    private Person buildPerson(String mailAddress) {
+        // TODO Validate email (at least a minimum)
+        String firstName = mailAddress.split(".")[0];
+        String lastName = mailAddress.split(".")[1];
+
+        return new Person(mailAddress, firstName, lastName);
     }
 
     /**
@@ -87,8 +105,8 @@ public class ConfigParser {
      * @return a list of mail messages
      * @throws IOException if the path isn't valid
      */
-    private LinkedList<String> loadMailsList(String pathToMails) throws IOException {
-        LinkedList<String> result = new LinkedList<>();
+    private ArrayList<String> loadMailsList(String pathToMails) throws IOException {
+        ArrayList<String> result = new ArrayList<>();
 
         // Parse messages file
         try (BufferedReader mailFile = new BufferedReader(new InputStreamReader(
