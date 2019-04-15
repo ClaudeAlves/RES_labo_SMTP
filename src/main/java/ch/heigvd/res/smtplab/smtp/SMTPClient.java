@@ -38,7 +38,7 @@ public class SMTPClient implements InterfaceSMTPClient{
         PrintWriter writer = new PrintWriter(client.getOutputStream());
 
         // Server greetings
-//        checkResponse(reader, 220);
+        checkResponse(reader, 220);
         write(writer, "EHLO superserver");
         checkResponse(reader, 250);
 
@@ -115,7 +115,12 @@ public class SMTPClient implements InterfaceSMTPClient{
 
         // Workaround the slowness of some servers
         try {
-            Thread.sleep(1000);
+            // TODO Don't do that
+            if (address.equals("smtp.mailtrap.io")) {
+                Thread.sleep(1000);
+            } else {
+                Thread.sleep(100);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
