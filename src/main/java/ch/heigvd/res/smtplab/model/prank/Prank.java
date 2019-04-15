@@ -37,7 +37,12 @@ public class Prank {
      */
     public Mail generateMailMessage() {
         Mail mail = new Mail();
-        mail.setBody(this.message + "\r\n" + victimSender.getName() + " " + victimSender.getSurname());
+
+        // Get the subject
+        String[] split = message.split("\n", 2);
+        mail.setSubject(split[0]);
+        // Get the message and add a signature
+        mail.setBody(split[1] + "\r\n" + victimSender.getName() + " " + victimSender.getSurname());
 
         String[] to = victimRecipients
                 .stream()

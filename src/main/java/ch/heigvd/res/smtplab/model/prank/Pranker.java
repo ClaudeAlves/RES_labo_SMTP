@@ -2,6 +2,7 @@ package ch.heigvd.res.smtplab.model.prank;
 
 import ch.heigvd.res.smtplab.config.ConfigParser;
 import ch.heigvd.res.smtplab.model.mail.Group;
+import ch.heigvd.res.smtplab.model.mail.Mail;
 import ch.heigvd.res.smtplab.model.mail.Person;
 import ch.heigvd.res.smtplab.smtp.SMTPClient;
 

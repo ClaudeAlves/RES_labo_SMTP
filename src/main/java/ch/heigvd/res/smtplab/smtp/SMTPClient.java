@@ -38,16 +38,27 @@ public class SMTPClient implements InterfaceSMTPClient{
         PrintWriter writer = new PrintWriter(client.getOutputStream());
 
         // Server greetings
-        checkResponse(reader, 220);
+//        checkResponse(reader, 220);
         write(writer, "EHLO superserver");
         checkResponse(reader, 250);
+
+        // If we need auth
+        // TODO Check for AUTH header
+        if (address.equals("smtp.mailtrap.io")) {
+            write(writer, "AUTH LOGIN");
+            checkResponse(reader, 334);
+            write(writer, "NGFkNzlkZDIyMDFmNjQ=");
+            checkResponse(reader, 334);
+            write(writer, "MWM0MTY0NDNmZjZlYTA=");
+            checkResponse(reader, 235);
+        }
 
         // For each recipient of the mail
         for (String recipient : mail.getTo()) {
             // Write commands
-            write(writer, "MAIL FROM: " + mail.getFrom());
+            write(writer, "MAIL FROM:<" + mail.getFrom() + ">");
             checkResponse(reader, 250);
-            write(writer, "RCPT TO: " + recipient);
+            write(writer, "RCPT TO:<" + recipient + ">");
             checkResponse(reader, 250);
             write(writer, "DATA");
             checkResponse(reader, 354);
@@ -69,7 +80,7 @@ public class SMTPClient implements InterfaceSMTPClient{
 
             // Workaround the limit of mails in a certain amount of time
             try {
-                Thread.sleep(500);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -104,7 +115,7 @@ public class SMTPClient implements InterfaceSMTPClient{
 
         // Workaround the slowness of some servers
         try {
-            Thread.sleep(100);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -115,7 +126,7 @@ public class SMTPClient implements InterfaceSMTPClient{
             line = reader.readLine();
 
             // If the line starts with the wanted response code followed by a space
-            if (line.startsWith(Integer.toString(responseCode) + " ")) {
+            if (line.startsWith(responseCode + " ")) {
                 ok = true;
             }
         }

@@ -40,7 +40,7 @@ To use this application from the sources, here are the steps required:
 
 1. Build the app with apache maven `mvn package`.
 2. Copy the `jar` file to the location of your choice `cp target/RES_labo-SMTP-1.0-SNAPSHOT-jar-with-dependencies.jar myfolder/RES-SMTP.jar`.
-3. Write a list of victim email addresses like the following:
+3. Write a list of victim email addresses (preferably with `name.surname@domain.tld`) like the following:
 
     ```
     john.doe@acme.com
@@ -49,11 +49,13 @@ To use this application from the sources, here are the steps required:
     ```
 
 4. You must have at least three victims for the application to function. Indeed the victims are separated in randomly selected groups of three or more.
-5. Write a list of prank messages in a similar fashion, but separated by `==`:
+5. Write a list of prank messages in a similar fashion (with mail subjects on the first line), but separated by `==`:
 
     ```
+    The Room
     Oh, hi Mark.
     ==
+    Google
     Hello,
     This is Google Assistant writing.
     May I ask you a few questions? Don't worry, nothing too personal!
