@@ -26,6 +26,7 @@ up MockMock in a Docker container:
 
 1. Build MockMock and get the `jar` file (you can also just get the jar they provide in their `release` folder).
 2. Copy the `jar` file in this repo's `docker` folder, and rename it `MockMock.jar`.
+3. Go into the `docker` folder (`cd docker`).
 3. Write the docker command `docker build --tag smtp-mock-server .` to create a new docker image.
 4. If all went well, you can see the new image in your list of images `docker images`.
 5. Launch the container using `docker run smtp-mock-server`.
@@ -47,7 +48,7 @@ To use this application from the sources, here are the steps required:
     jojo.adventure@weeb.jpp
     ```
 
-4. You must have at least three victims for the application to function. Indeed the victims are separated in groups of three.
+4. You must have at least three victims for the application to function. Indeed the victims are separated in randomly selected groups of three or more.
 5. Write a list of prank messages in a similar fashion, but separated by `==`:
 
     ```
